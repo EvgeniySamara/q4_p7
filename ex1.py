@@ -13,19 +13,14 @@
 # задания функций пакет для работы с файлами.
 #
 import os
-from xml.dom.pulldom import parse
-
-
-# from os import listdir
-# from os.path import isfile, join
-
 
 def group_rename(target_dir,wish_name, num_len,file_ext,wish_ext):
 
     def do_rename(old,new):
         os.rename(old,new)
 
-
+    if not os.path.isdir(target_dir):
+        raise FileNotFoundError(f"Каталог '{target_dir}' не найден.")
     os.chdir(target_dir)
     num_limit = int('9'*num_len)
     # print(num_limit)
@@ -54,7 +49,24 @@ def group_rename(target_dir,wish_name, num_len,file_ext,wish_ext):
 
     print(f"Переименовано {i} файлов")
 
-group_rename('test_dir','newfile', 3,'me','txt')
+
+
+
+
+if __name__ == "__main__":
+    import sys
+# Проверяем количество аргументов командной строки
+    if len(sys.argv) != 6:
+        print("Usage: python file_rename.py <directory> <final_name><num_digits> <old_extension> <new_extension>")
+        sys.exit(1)
+    directory = sys.argv[1]
+    final_name = sys.argv[2]
+    num_digits = int(sys.argv[3])
+    old_extension = sys.argv[4]
+    new_extension = sys.argv[5]
+    group_rename(directory, final_name, num_digits, old_extension, new_extension)
+    # group_rename('test_dir','newfile', 3,'me','txt')
+
 
 
 
