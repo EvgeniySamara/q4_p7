@@ -23,8 +23,6 @@
 # нужно удалить, чтобы избежать случайного удаления важных данных.
 import os
 import time
-from ast import iter_fields
-from operator import ifloordiv
 
 
 def del_old_file(target_dir,dayold):
